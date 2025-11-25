@@ -54,12 +54,12 @@ $app->get('/api/v1/jobs', function ($request, $response) use ($jobController) {
 
 // GET /api/v1/jobs/search - Search jobs (internal + external)
 $app->get('/api/v1/jobs/search', function ($request, $response) use ($jobController) {
-    return $jobController->search($request, $response);
+    return $jobController->searchJobs($request, $response);
 });
 
 // GET /api/v1/jobs/{id} - Get job by ID
 $app->get('/api/v1/jobs/{id}', function ($request, $response, $args) use ($jobController) {
-    return $jobController->getById($request, $response, $args);
+    return $jobController->findById($request, $response, $args);
 });
 
 // DELETE /api/v1/jobs/{id} - Delete job

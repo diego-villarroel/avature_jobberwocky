@@ -57,4 +57,52 @@ class JobController {
       ->withStatus(201);
   }
 
+  public function findById(Request $request, Response $response, array $args) : Response {
+    try {
+      $job = $this->jobService->findById($args['id']);
+      $response->getBody()->write(json_encode([
+        'success' => true,
+        'data' => $this->utils->objToArray($job)
+      ]));
+
+      return $response->withHeader('Content-Type', 'application/json');
+    } catch (\Exception $e) {
+      $response->getBody()->write(json_encode([
+        'success' => false,
+        'error' => 'Internal server error'
+      ]));
+
+      return $response
+        ->withHeader('Content-Type', 'application/json')
+        ->withStatus(500);
+    }
+  }
+
+  public function searchJobs(Request $request, Response $response) : Response {
+    try {
+      var_dump($request->getQueryParams());
+      $jobs = $this->jobService->searchJobs($request->getQueryParams());
+      $data = [];
+      foreach ($jobs as $job) {
+        $data[] = $this->utils->objToArray($job);
+      }
+      $response->getBody()->write(json_encode([
+        'success' => true,
+        'data' => $data,
+        'count' => count($jobs)
+      ]));
+
+      return $response->withHeader('Content-Type', 'application/json');
+    } catch (\Exception $e) {
+      $response->getBody()->write(json_encode([
+        'success' => false,
+        'error' => 'Internal server error'
+      ]));
+
+      return $response
+        ->withHeader('Content-Type', 'application/json')
+        ->withStatus(500);
+    }
+  }
+
 }
