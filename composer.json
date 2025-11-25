@@ -1,0 +1,34 @@
+{
+  "name": "jobberwocky/api",
+  "description": "Job opportunities service",
+  "type": "project",
+  "require": {
+    "php": "^8.3",
+    "slim/slim": "^4.12",
+    "slim/psr7": "^1.6",
+    "vlucas/phpdotenv": "^5.5",
+    "guzzlehttp/guzzle": "^7.8",
+    "ext-pdo": "*",
+    "ext-sqlite3": "*",
+    "ext-simplexml": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5",
+    "mockery/mockery": "^1.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jobberwocky\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "test-coverage": "phpunit --coverage-html coverage",
+    "start": "php -S localhost:8080 -t public"
+  }
+}

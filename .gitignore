@@ -1,0 +1,33 @@
+# Vendor
+/vendor/
+
+# Database
+/database/*.sqlite
+/database/*.db
+
+# Environment
+.env
+.env.local
+
+# IDE
+# .idea/
+# .vscode/
+# *.swp
+# *.swo
+# *~
+
+# Tests
+/coverage/
+.phpunit.result.cache
+.phpunit.cache
+
+# Logs
+*.log
+/logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Composer
+composer.lock

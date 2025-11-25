@@ -1,0 +1,32 @@
+services:
+  # Servicio principal de Jobberwocky
+  jobberwocky:
+    build: .
+    container_name: jobberwocky-api
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./database:/app/database
+      - ./:/app/
+    environment:
+      - EXTERNAL_SOURCE_URL=http://external-source:8080
+    depends_on:
+      - external-source
+    networks:
+      - jobberwocky-network
+
+  # Fuente externa (jobberwocky-extra-source-v2)
+  external-source:
+    image: avatureexternaljobs
+    container_name: jobberwocky-external-source
+    ports:
+      - "8081:8080"
+    networks:
+      - jobberwocky-network
+
+networks:
+  jobberwocky-network:
+    driver: bridge
+
+volumes:
+  database:
