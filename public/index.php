@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use Jobberwocky\Adapters\ExternalJobSourceAdapter;
-// use Jobberwocky\Controllers\AlertController;
+use Jobberwocky\Controllers\AlertController;
 use Jobberwocky\Controllers\JobController;
 use Jobberwocky\Repositories\SQLiteJobRepository;
-// use Jobberwocky\Services\AlertService;
+use Jobberwocky\Services\AlertService;
 use Jobberwocky\Services\ExternalSourceService;
 use Jobberwocky\Services\JobService;
 use Slim\Factory\AppFactory;
@@ -23,14 +23,14 @@ $repository = new SQLiteJobRepository(__DIR__ . '/../database/jobs.sqlite');
 $jobService = new JobService($repository);
 $externalAdapter = new ExternalJobSourceAdapter('http://localhost:8081');
 $externalSource = new ExternalSourceService($jobService, $externalAdapter);
-// $alertService = new AlertService();
+$alertService = new AlertService();
 
 $jobController = new JobController(
   $jobService, 
   $externalSource, 
-  // $alertService
+  $alertService
 );
-// $alertController = new AlertController($alertService);
+$alertController = new AlertController($alertService);
 
 // Crear aplicación Slim
 $app = AppFactory::create();
@@ -72,19 +72,19 @@ $app->get('/api/v1/jobs/{id}', function ($request, $response, $args) use ($jobCo
 // ============================================
 
 // POST /api/v1/alerts/subscribe - Subscribe to job alerts
-// $app->post('/api/v1/alerts/subscribe', function ($request, $response) use ($alertController) {
-//     return $alertController->subscribe($request, $response);
-// });
+$app->post('/api/v1/alerts/subscribe', function ($request, $response) use ($alertController) {
+    return $alertController->subscribe($request, $response);
+});
 
 // DELETE /api/v1/alerts/{id} - Unsubscribe from alerts
-// $app->delete('/api/v1/alerts/{id}', function ($request, $response, $args) use ($alertController) {
-//     return $alertController->unsubscribe($request, $response, $args);
-// });
+$app->delete('/api/v1/alerts/{id}', function ($request, $response, $args) use ($alertController) {
+    return $alertController->unsubscribe($request, $response, $args);
+});
 
 // GET /api/v1/alerts - Get all alerts
-// $app->get('/api/v1/alerts', function ($request, $response) use ($alertController) {
-//     return $alertController->getAll($request, $response);
-// });
+$app->get('/api/v1/alerts', function ($request, $response) use ($alertController) {
+    return $alertController->getAll($request, $response);
+});
 
 // ============================================
 // Health Check

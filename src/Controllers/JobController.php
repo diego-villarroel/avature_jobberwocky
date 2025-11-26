@@ -80,7 +80,6 @@ class JobController {
 
   public function searchJobs(Request $request, Response $response) : Response {
     try {
-      var_dump($request->getQueryParams());
       $jobs = $this->jobService->searchJobs($request->getQueryParams());
       $data = [];
       foreach ($jobs as $job) {

@@ -3,7 +3,7 @@
 # Script para probar la API de Jobberwocky
 # Uso: ./examples/test_api.sh
 
-BASE_URL="http://localhost:8080"
+BASE_URL="http://localhost:8090"
 API_URL="$BASE_URL/api/v1"
 
 echo "======================================"

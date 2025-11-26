@@ -13,7 +13,6 @@ class Utils {
     foreach ($reflector->getProperties() as $prop) {
       $prop->setAccessible(true);
       $array[$prop->getName()] = $prop->getValue($objeto);
-      // echo $prop->getName() . ': ' . $prop->getValue($objeto) . "\n";
     }   
     return $array;
   }

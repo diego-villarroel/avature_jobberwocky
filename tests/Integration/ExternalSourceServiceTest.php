@@ -89,7 +89,7 @@ class ExternalSourceServiceTest extends TestCase {
       'company' => 'techcorp'
     ];
     $resutls = $this->externalSource->searchAllSources($criteria, true);
-
+    
     $this->assertNotEmpty($resutls);
     $this->assertGreaterThanOrEqual(1, count($resutls));
   }
